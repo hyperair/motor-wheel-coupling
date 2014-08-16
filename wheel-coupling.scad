@@ -8,6 +8,7 @@ use <MCAD/fasteners/threads.scad>
 collar_thickness = 10 * length_mm;
 collar_wall_thickness = M6;
 motor_shaft_dia = M8;
+motor_shaft_depth = 18.35 * length_mm;
 setscrew_size = M3;
 setscrew_pos = collar_thickness / 2;
 setscrew_clearance = 0.3 * length_mm;
@@ -22,13 +23,21 @@ key_length = 12 * length_mm;
 
 
 // main model
-collar ();
+difference () {
+    basic_coupling_shape ();
+    motor_shaft ();
+}
 
-translate ([0, 0, collar_thickness - epsilon])
-keyed_shaft ();
+module basic_coupling_shape ()
+{
+    collar ();
 
-translate ([flange_dia + 5 * length_mm, 0, 0])
-flange ();
+    translate ([0, 0, collar_thickness - epsilon])
+    keyed_shaft ();
+
+    translate ([flange_dia + 5 * length_mm, 0, 0])
+    flange ();
+}
 
 module collar ()
 {
@@ -39,13 +48,6 @@ module collar ()
         cylinder (
             d = OD,
             h = collar_thickness
-        );
-
-        // motor shaft
-        translate ([0, 0, -epsilon])
-        polyhole (
-            d = motor_shaft_dia,
-            h = collar_thickness + epsilon * 2
         );
 
         translate ([0, 0, setscrew_pos])
@@ -80,6 +82,7 @@ module keyed_shaft ()
     translate ([0, 0, shaft_length])
     metric_thread (
         diameter = shaft_od,
+        pitch = 2,
         length = flange_thickness + 1 * length_mm,
         internal = false
     );
@@ -97,8 +100,18 @@ module flange ()
         translate ([0, 0, -epsilon])
         metric_thread (
             diameter = shaft_od,
+            pitch = 2,
             length = flange_thickness + epsilon * 2,
             internal = true
         );
     }
+}
+
+module motor_shaft ()
+{
+    translate ([0, 0, -epsilon])
+    polyhole (
+        d = motor_shaft_dia,
+        h = motor_shaft_depth
+    );
 }
