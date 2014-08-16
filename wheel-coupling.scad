@@ -8,7 +8,7 @@ use <MCAD/fasteners/threads.scad>
 collar_thickness = 10 * length_mm;
 collar_wall_thickness = M6;
 motor_shaft_dia = M8;
-motor_shaft_depth = 18.35 * length_mm;
+motor_shaft_depth = 26 * length_mm;
 setscrew_size = M3;
 setscrew_pos = collar_thickness / 2;
 setscrew_clearance = 0.3 * length_mm;
