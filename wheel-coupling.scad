@@ -15,7 +15,7 @@ setscrew_clearance = 0.3 * length_mm;
 
 shaft_od = 12.7 * length_mm;
 shaft_length = 20 * length_mm;
-flange_dia = 26 * length_mm;
+flange_dia = 22 * length_mm;
 flange_thickness = 5 * length_mm;
 key_width = 17 * length_mm;
 key_thickness = 3 * length_mm;
