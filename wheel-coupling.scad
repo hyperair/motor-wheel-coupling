@@ -5,7 +5,7 @@ use <MCAD/shapes/polyhole.scad>
 use <MCAD/fasteners/threads.scad>
 
 // settings
-collar_thickness = 10 * length_mm;
+collar_thickness = 15 * length_mm;
 collar_wall_thickness = M6;
 motor_shaft_dia = M8;
 motor_shaft_depth = 26 * length_mm;
