@@ -8,6 +8,7 @@ use <MCAD/fasteners/threads.scad>
 collar_thickness = 15 * length_mm;
 collar_wall_thickness = M6;
 motor_shaft_dia = M8;
+motor_shaft_clearance = 0.3 * length_mm;
 motor_shaft_depth = 26 * length_mm;
 setscrew_size = M3;
 setscrew_pos = collar_thickness / 2;
@@ -23,7 +24,7 @@ key_length = 12 * length_mm;
 
 shaft_screw_maj_dia = 12 * length_mm;
 shaft_screw_pitch = 1.75 * length_mm;
-shaft_nut_clearance = 0.4 * length_mm;
+shaft_nut_clearance = 0.3 * length_mm;
 
 
 // main model
@@ -103,7 +104,7 @@ module flange ()
 
         translate ([0, 0, -epsilon])
         metric_thread (
-            diameter = shaft_screw_maj_dia + shaft_nut_clearance,
+            diameter = shaft_screw_maj_dia + shaft_nut_clearance * 2,
             pitch = 1.75,
             length = flange_thickness + epsilon * 2,
             internal = true
@@ -115,7 +116,7 @@ module motor_shaft ()
 {
     translate ([0, 0, -epsilon])
     polyhole (
-        d = motor_shaft_dia,
+        d = motor_shaft_dia + motor_shaft_clearance * 2,
         h = motor_shaft_depth
     );
 }
