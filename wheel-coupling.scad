@@ -21,6 +21,10 @@ key_width = 17 * length_mm;
 key_thickness = 3 * length_mm;
 key_length = 12 * length_mm;
 
+shaft_screw_maj_dia = 12 * length_mm;
+shaft_screw_pitch = 1.75 * length_mm;
+shaft_nut_clearance = 0.4 * length_mm;
+
 
 // main model
 difference () {
@@ -81,8 +85,8 @@ module keyed_shaft ()
 
     translate ([0, 0, shaft_length])
     metric_thread (
-        diameter = shaft_od,
-        pitch = 2,
+        diameter = shaft_screw_maj_dia,
+        pitch = shaft_screw_pitch,
         length = flange_thickness + 1 * length_mm,
         internal = false
     );
@@ -99,8 +103,8 @@ module flange ()
 
         translate ([0, 0, -epsilon])
         metric_thread (
-            diameter = shaft_od,
-            pitch = 2,
+            diameter = shaft_screw_maj_dia + shaft_nut_clearance,
+            pitch = 1.75,
             length = flange_thickness + epsilon * 2,
             internal = true
         );
