@@ -12,7 +12,7 @@ motor_shaft_clearance = 0.3 * length_mm;
 motor_shaft_depth = 26 * length_mm;
 setscrew_size = M3;
 setscrew_pos = collar_thickness / 2;
-setscrew_clearance = 0.3 * length_mm;
+setscrew_clearance = 0.1 * length_mm;
 
 shaft_od = 12.7 * length_mm;
 shaft_length = 20 * length_mm;
