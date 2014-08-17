@@ -8,6 +8,7 @@ use <MCAD/fasteners/threads.scad>
 collar_thickness = 10 * length_mm;
 collar_wall_thickness = 10 * length_mm;
 motor_shaft_dia = M8;
+motor_shaft_flat_dia = 7 * length_mm;
 motor_shaft_clearance = 0.15 * length_mm;
 motor_shaft_depth = 26 * length_mm;
 setscrew_size = M3;
@@ -25,6 +26,10 @@ key_length = 12 * length_mm;
 shaft_screw_maj_dia = 12 * length_mm;
 shaft_screw_pitch = 1.75 * length_mm;
 shaft_nut_clearance = 0.3 * length_mm;
+
+// don't modify
+motor_shaft_flat_offset = motor_shaft_dia / 2 -
+(motor_shaft_dia - motor_shaft_flat_dia);
 
 
 // main model
@@ -62,7 +67,7 @@ module collar ()
             h = OD
         );
 
-        translate ([motor_shaft_dia/2 + 0.5 * length_mm, 0, setscrew_pos])
+        translate ([motor_shaft_flat_offset + 0.5 * length_mm, 0, setscrew_pos])
         mirror (X)
         rotate (-90, Y)
         hull () {
@@ -115,8 +120,15 @@ module flange ()
 module motor_shaft ()
 {
     translate ([0, 0, -epsilon])
-    polyhole (
-        d = motor_shaft_dia + motor_shaft_clearance * 2,
-        h = motor_shaft_depth
-    );
+    difference () {
+        polyhole (
+            d = motor_shaft_dia + motor_shaft_clearance * 2,
+            h = motor_shaft_depth
+        );
+
+        translate ([motor_shaft_flat_offset + motor_shaft_clearance,
+                -motor_shaft_dia / 2, -epsilon])
+        cube ([motor_shaft_dia, motor_shaft_dia,
+                motor_shaft_depth + epsilon * 2]);
+    }
 }
