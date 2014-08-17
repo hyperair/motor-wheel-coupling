@@ -6,7 +6,7 @@ use <MCAD/fasteners/threads.scad>
 
 // settings
 collar_thickness = 10 * length_mm;
-collar_wall_thickness = 10 * length_mm;
+collar_wall_thickness = 8 * length_mm;
 motor_shaft_dia = M8;
 motor_shaft_flat_dia = 7 * length_mm;
 motor_shaft_clearance = 0.15 * length_mm;
